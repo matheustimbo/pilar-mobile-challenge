@@ -5,7 +5,7 @@ import 'package:pilar_mobile_challenge/app/app.dart';
 import 'package:pilar_mobile_challenge/app/di.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env", isOptional: true);
   await initializeDateFormatting('pt_BR', null);
   DI.setup();
   runApp(const App());

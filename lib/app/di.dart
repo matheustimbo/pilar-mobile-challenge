@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart';
 import 'package:pilar_mobile_challenge/app/data/repositories/movies_repository_impl.dart';
@@ -34,7 +33,7 @@ class DI {
     getIt.registerLazySingleton(
       () => Dio(
         BaseOptions(baseUrl: Constants.apiBaseUrl, headers: {
-          'Authorization': 'Bearer ${dotenv.env['TMDB_API_KEY']}',
+          'Authorization': 'Bearer ${Constants.apiKey}',
         }),
       ),
     );

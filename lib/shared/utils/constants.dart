@@ -1,4 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Constants {
+  static String apiKey = dotenv.env['TMDB_API_KEY'] ??
+      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdlNzA3NjdkZmU0MmY4ZjcyY2Q4YjllNTkyYTQ0YyIsInN1YiI6IjVlNGM1NGJiOWI4NjE2MDAxODY3MDE3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cwXiGawvofBRNarR6abFHG_LxeEGrManFqQNEdZdKPk';
   static const apiBaseUrl = 'https://api.themoviedb.org/3';
   static const String tmdbLogo =
       'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg';

@@ -20,6 +20,7 @@ class MovieListHomeHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
         image: DecorationImage(
           image: const CachedNetworkImageProvider(
             Constants.movieListHeaderBanner,
@@ -65,6 +66,12 @@ class MovieListHomeHeaderWidget extends StatelessWidget {
                 Expanded(
                   child: TextField(
                     onChanged: searchPageStore.setSearchQuery,
+                    onEditingComplete: () => Navigator.of(context).pushNamed(
+                      MovieSearchPage.routeName,
+                      arguments: MovieSearchPageArgs(
+                        searchText: searchPageStore.searchQuery,
+                      ),
+                    ),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),

@@ -61,7 +61,7 @@ class MovieDetailsCastWidget extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 259,
+                height: 279,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   scrollDirection: Axis.horizontal,
