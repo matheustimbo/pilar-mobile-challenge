@@ -49,7 +49,7 @@ class _MovieListPageState extends State<MovieListPage> {
             child: Observer(builder: (context) {
               return MovieListSectionWidget(
                 movies: store.popularMovies.movieList,
-                sectionLabel: 'Populares',
+                sectionLabel: 'Popular',
                 hasError: store.popularMovies.hasErrorLoadingInitialMovieList,
                 isLoading: store.popularMovies.isLoadingInitialMovieList,
                 onRetry: controller.fetchInitialPopularMoviesList,

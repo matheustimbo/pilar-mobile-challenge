@@ -31,8 +31,8 @@ jobs:
           git config --global user.email matheusfild4@hotmail.com
           git config --global user.name matheustimbo
           git status
-          git remote add origin https://${{secrets.token}}@/github.com/matheustimbo/matheustimbo.github.io.git
+          git remote add origin https://${{secrets.token}}@github.com/matheustimbo/matheustimbo.github.io.git
           git checkout -b gh-pages
-          git add --all
+          git add .
           git commit -m "update"
           git push origin gh-pages -f
