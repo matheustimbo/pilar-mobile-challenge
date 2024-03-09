@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pilar_mobile_challenge/app/presentation/controllers/movie_list_page_controller.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_list_page_store.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/app_bar_widget.dart';
+import 'package:pilar_mobile_challenge/app/presentation/widgets/desktop_max_width_wrapper.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_list_home_header_widget.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_list_section_widget.dart';
 
@@ -26,14 +27,14 @@ class _MovieListPageState extends State<MovieListPage> {
         slivers: [
           const AppBarWidget(),
           SliverToBoxAdapter(
-            child: _DesktopMaxWidthWrapper(
+            child: DesktopMaxWidthWrapper(
               child: MovieListHomeHeaderWidget(
                 store: store,
               ),
             ),
           ),
           SliverToBoxAdapter(
-            child: _DesktopMaxWidthWrapper(
+            child: DesktopMaxWidthWrapper(
               child: Observer(builder: (context) {
                 return MovieListSectionWidget(
                   movies: store.nowPlayingMovies.movieList,
@@ -51,7 +52,7 @@ class _MovieListPageState extends State<MovieListPage> {
             ),
           ),
           SliverToBoxAdapter(
-            child: _DesktopMaxWidthWrapper(
+            child: DesktopMaxWidthWrapper(
               child: Observer(builder: (context) {
                 return MovieListSectionWidget(
                   movies: store.popularMovies.movieList,
@@ -67,7 +68,7 @@ class _MovieListPageState extends State<MovieListPage> {
             ),
           ),
           SliverToBoxAdapter(
-            child: _DesktopMaxWidthWrapper(
+            child: DesktopMaxWidthWrapper(
               child: Observer(builder: (context) {
                 return MovieListSectionWidget(
                   movies: store.topRatedMovies.movieList,
@@ -87,22 +88,6 @@ class _MovieListPageState extends State<MovieListPage> {
             child: SizedBox(height: MediaQuery.of(context).padding.bottom),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _DesktopMaxWidthWrapper extends StatelessWidget {
-  final Widget child;
-
-  const _DesktopMaxWidthWrapper({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 1300),
-        child: child,
       ),
     );
   }

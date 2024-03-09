@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pilar_mobile_challenge/app/presentation/controllers/movie_search_page_controller.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_search_page_store.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/app_bar_widget.dart';
+import 'package:pilar_mobile_challenge/app/presentation/widgets/desktop_max_width_wrapper.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_vertical_list_item_widget.dart';
 
 class MovieSearchPageArgs {
@@ -39,7 +40,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
     controller.searchInitialMovieList(widget.args.searchText);
     searchQueryReactionDisposer = reaction(
       (_) => [store.searchQuery],
-      (a) {
+      (_) {
         searchByNewQuery();
       },
       delay: 500,
@@ -150,8 +151,10 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
             return SliverPadding(
               padding: const EdgeInsets.all(20),
               sliver: SliverList.separated(
-                itemBuilder: (context, index) => MovieVerticalListItemWidget(
-                  movie: store.searchMovies.movieList[index],
+                itemBuilder: (context, index) => DesktopMaxWidthWrapper(
+                  child: MovieVerticalListItemWidget(
+                    movie: store.searchMovies.movieList[index],
+                  ),
                 ),
                 separatorBuilder: (_, __) => const SizedBox(height: 20),
                 itemCount: store.searchMovies.movieList.length,
