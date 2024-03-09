@@ -65,6 +65,7 @@ class MovieListHomeHeaderWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
+                    key: const Key('home_search_text_field'),
                     onChanged: searchPageStore.setSearchQuery,
                     onEditingComplete: () => Navigator.of(context).pushNamed(
                       MovieSearchPage.routeName,
@@ -94,6 +95,7 @@ class MovieListHomeHeaderWidget extends StatelessWidget {
                   ),
                 ),
                 InkWell(
+                  key: const Key('home_search_button'),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       MovieSearchPage.routeName,

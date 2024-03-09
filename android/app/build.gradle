@@ -45,10 +45,16 @@ android {
         applicationId "com.example.pilar_mobile_challenge"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
+    }
+
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
     }
 
     buildTypes {
@@ -64,4 +70,6 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    androidTestUtil "androidx.test:orchestrator:1.4.2"
+}

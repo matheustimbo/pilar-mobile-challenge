@@ -36,6 +36,16 @@ dev_dependencies:
   freezed: ^2.4.7
   build_runner: ^2.4.8
   json_serializable: ^6.7.1
+  integration_test:
+    sdk: flutter
+  patrol: ^3.5.2
 
 flutter:
   uses-material-design: true
+
+patrol:
+  app_name: My App
+  android:
+    package_name: com.example.pilar_mobile_challenge
+  ios:
+    bundle_id: com.example.pilarMobileChallenge

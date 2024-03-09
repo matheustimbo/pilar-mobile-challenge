@@ -14,6 +14,7 @@ class AppBarWidget extends StatelessWidget {
       title: CachedNetworkImage(
         width: 55,
         imageUrl: Constants.tmdbLogo,
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
   }

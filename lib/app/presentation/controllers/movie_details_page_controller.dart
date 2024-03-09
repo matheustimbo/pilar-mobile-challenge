@@ -28,7 +28,9 @@ class MovieDetailsPageController {
   Future<void> fetchPosterPathImagePredominantColor(
     String posterPathUrl,
   ) async {
-    final provider = CachedNetworkImageProvider(posterPathUrl);
+    final provider = CachedNetworkImageProvider(
+      posterPathUrl,
+    );
 
     final pallete = await PaletteGenerator.fromImageProvider(
       provider,

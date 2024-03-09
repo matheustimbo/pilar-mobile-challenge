@@ -36,6 +36,13 @@ void main() {
     ],
     'runtime': 120,
     'tagline': 'Tagline',
+    'adult': false,
+    'vote_average': 7.5,
+    'poster_path': 'poster_path',
+    'backdrop_path': 'backdrop_path',
+    'overview': 'Overview',
+    'title': 'Title',
+    'release_date': '2022-01-01',
   };
 
   final exampleMovieDetailsParsedData =

@@ -69,6 +69,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('movies_search_page'),
       body: CustomScrollView(
         controller: scrollController,
         slivers: [
@@ -78,6 +79,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
             pinned: true,
             automaticallyImplyLeading: false,
             title: TextFormField(
+              key: const Key('movies_search_page_search_text_field'),
               onChanged: store.setSearchQuery,
               initialValue: widget.args.searchText,
               decoration: InputDecoration(
