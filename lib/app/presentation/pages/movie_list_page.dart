@@ -26,57 +26,83 @@ class _MovieListPageState extends State<MovieListPage> {
         slivers: [
           const AppBarWidget(),
           SliverToBoxAdapter(
-            child: MovieListHomeHeaderWidget(
-              store: store,
+            child: _DesktopMaxWidthWrapper(
+              child: MovieListHomeHeaderWidget(
+                store: store,
+              ),
             ),
           ),
           SliverToBoxAdapter(
-            child: Observer(builder: (context) {
-              return MovieListSectionWidget(
-                movies: store.nowPlayingMovies.movieList,
-                sectionLabel: 'Em cartaz',
-                hasError:
-                    store.nowPlayingMovies.hasErrorLoadingInitialMovieList,
-                isLoading: store.nowPlayingMovies.isLoadingInitialMovieList,
-                onRetry: controller.fetchInitialNowPlayingMoviesList,
-                onReachEndOfList: controller.fetchMoreNowPlayingMovies,
-                isLoadingMoreMovies: store.nowPlayingMovies.isLoadingMoreMovies,
-                onInit: controller.fetchInitialNowPlayingMoviesList,
-              );
-            }),
+            child: _DesktopMaxWidthWrapper(
+              child: Observer(builder: (context) {
+                return MovieListSectionWidget(
+                  movies: store.nowPlayingMovies.movieList,
+                  sectionLabel: 'Em cartaz',
+                  hasError:
+                      store.nowPlayingMovies.hasErrorLoadingInitialMovieList,
+                  isLoading: store.nowPlayingMovies.isLoadingInitialMovieList,
+                  onRetry: controller.fetchInitialNowPlayingMoviesList,
+                  onReachEndOfList: controller.fetchMoreNowPlayingMovies,
+                  isLoadingMoreMovies:
+                      store.nowPlayingMovies.isLoadingMoreMovies,
+                  onInit: controller.fetchInitialNowPlayingMoviesList,
+                );
+              }),
+            ),
           ),
           SliverToBoxAdapter(
-            child: Observer(builder: (context) {
-              return MovieListSectionWidget(
-                movies: store.popularMovies.movieList,
-                sectionLabel: 'Popular',
-                hasError: store.popularMovies.hasErrorLoadingInitialMovieList,
-                isLoading: store.popularMovies.isLoadingInitialMovieList,
-                onRetry: controller.fetchInitialPopularMoviesList,
-                onReachEndOfList: controller.fetchMorePopularMovies,
-                isLoadingMoreMovies: store.popularMovies.isLoadingMoreMovies,
-                onInit: controller.fetchInitialPopularMoviesList,
-              );
-            }),
+            child: _DesktopMaxWidthWrapper(
+              child: Observer(builder: (context) {
+                return MovieListSectionWidget(
+                  movies: store.popularMovies.movieList,
+                  sectionLabel: 'Populares',
+                  hasError: store.popularMovies.hasErrorLoadingInitialMovieList,
+                  isLoading: store.popularMovies.isLoadingInitialMovieList,
+                  onRetry: controller.fetchInitialPopularMoviesList,
+                  onReachEndOfList: controller.fetchMorePopularMovies,
+                  isLoadingMoreMovies: store.popularMovies.isLoadingMoreMovies,
+                  onInit: controller.fetchInitialPopularMoviesList,
+                );
+              }),
+            ),
           ),
           SliverToBoxAdapter(
-            child: Observer(builder: (context) {
-              return MovieListSectionWidget(
-                movies: store.topRatedMovies.movieList,
-                sectionLabel: 'Melhor avaliados',
-                hasError: store.topRatedMovies.hasErrorLoadingInitialMovieList,
-                isLoading: store.topRatedMovies.isLoadingInitialMovieList,
-                onRetry: controller.fetchInitialTopRatedMoviesList,
-                onReachEndOfList: controller.fetchMoreTopRatedMovies,
-                isLoadingMoreMovies: store.topRatedMovies.isLoadingMoreMovies,
-                onInit: controller.fetchInitialTopRatedMoviesList,
-              );
-            }),
+            child: _DesktopMaxWidthWrapper(
+              child: Observer(builder: (context) {
+                return MovieListSectionWidget(
+                  movies: store.topRatedMovies.movieList,
+                  sectionLabel: 'Melhor avaliados',
+                  hasError:
+                      store.topRatedMovies.hasErrorLoadingInitialMovieList,
+                  isLoading: store.topRatedMovies.isLoadingInitialMovieList,
+                  onRetry: controller.fetchInitialTopRatedMoviesList,
+                  onReachEndOfList: controller.fetchMoreTopRatedMovies,
+                  isLoadingMoreMovies: store.topRatedMovies.isLoadingMoreMovies,
+                  onInit: controller.fetchInitialTopRatedMoviesList,
+                );
+              }),
+            ),
           ),
           SliverToBoxAdapter(
             child: SizedBox(height: MediaQuery.of(context).padding.bottom),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _DesktopMaxWidthWrapper extends StatelessWidget {
+  final Widget child;
+
+  const _DesktopMaxWidthWrapper({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1300),
+        child: child,
       ),
     );
   }
