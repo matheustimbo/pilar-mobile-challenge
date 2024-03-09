@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -8,11 +8,12 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Theme.of(context).primaryColor,
+      foregroundColor: Colors.white,
+      backgroundColor: const Color(0xFF042644),
       floating: true,
-      title: SvgPicture.network(
+      title: CachedNetworkImage(
         width: 55,
-        Constants.tmdbLogo,
+        imageUrl: Constants.tmdbLogo,
       ),
     );
   }
