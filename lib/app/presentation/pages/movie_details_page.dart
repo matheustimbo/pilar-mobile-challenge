@@ -10,6 +10,7 @@ import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_details_in
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_details_overview_widget.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_details_review_widget.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_details_title_widget.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieDetailsPageArgs {
   final MovieListItem movie;
@@ -43,10 +44,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   }
 
   String get posterPathUrl =>
-      'https://media.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}';
+      '${Constants.moviePosterPathw220h330BaseUrl}${movie.poster_path}';
 
   String get backdropPathUrl =>
-      'https://media.themoviedb.org/t/p/w1000_and_h450_multi_faces${movie.backdrop_path}';
+      '${Constants.movieBackdropPathw1000h450BaseUrl}${movie.backdrop_path}';
 
   @override
   Widget build(BuildContext context) {

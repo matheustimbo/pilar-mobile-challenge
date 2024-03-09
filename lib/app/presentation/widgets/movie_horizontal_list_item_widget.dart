@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 import 'package:pilar_mobile_challenge/app/presentation/pages/movie_details_page.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_vote_indicator_widget.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieHorizontalListItemWidget extends StatelessWidget {
   final MovieListItem movie;
@@ -37,7 +38,7 @@ class MovieHorizontalListItemWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: CachedNetworkImage(
                       imageUrl:
-                          'https://image.tmdb.org/t/p/w500${movie.poster_path}',
+                          '${Constants.moviePosterPathw500BaseUrl}${movie.poster_path}',
                       width: 150,
                       height: 225,
                       fit: BoxFit.cover,

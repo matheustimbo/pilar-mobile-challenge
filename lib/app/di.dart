@@ -11,6 +11,7 @@ import 'package:pilar_mobile_challenge/app/domain/usecases/get_popular_movies_li
 import 'package:pilar_mobile_challenge/app/domain/usecases/get_top_rated_movies_list_use_case.dart';
 import 'package:pilar_mobile_challenge/app/domain/usecases/search_movie_by_title_use_case.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_search_page_store.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class DI {
   static T get<T extends Object>({
@@ -32,7 +33,7 @@ class DI {
     //shared
     getIt.registerLazySingleton(
       () => Dio(
-        BaseOptions(baseUrl: 'https://api.themoviedb.org/3', headers: {
+        BaseOptions(baseUrl: Constants.apiBaseUrl, headers: {
           'Authorization': 'Bearer ${dotenv.env['TMDB_API_KEY']}',
         }),
       ),

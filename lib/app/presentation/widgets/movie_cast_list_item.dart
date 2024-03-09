@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_cast.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieCastListItem extends StatelessWidget {
   final MovieCast person;
@@ -11,7 +12,7 @@ class MovieCastListItem extends StatelessWidget {
   });
 
   String get personProfileImageUrl => person.profile_path != null
-      ? 'https://media.themoviedb.org/t/p/w240_and_h266_face${person.profile_path}'
+      ? '${Constants.movieCastProfilePathBaseUrl}${person.profile_path}'
       : "";
 
   @override

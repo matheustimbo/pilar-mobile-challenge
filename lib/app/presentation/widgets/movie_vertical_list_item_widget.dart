@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 import 'package:pilar_mobile_challenge/app/presentation/pages/movie_details_page.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieVerticalListItemWidget extends StatelessWidget {
   final MovieListItem movie;
@@ -41,7 +42,7 @@ class MovieVerticalListItemWidget extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl:
-                  'https://image.tmdb.org/t/p/w260_and_h390_bestv2${movie.poster_path}',
+                  '${Constants.moviePosterPathw260h390BaseUrl}${movie.poster_path}',
               width: 94,
               height: 141,
               fit: BoxFit.cover,

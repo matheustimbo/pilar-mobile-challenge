@@ -4,6 +4,7 @@ import 'package:pilar_mobile_challenge/app/di.dart';
 import 'package:pilar_mobile_challenge/app/presentation/pages/movie_search_page.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_list_page_store.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_search_page_store.dart';
+import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieListHomeHeaderWidget extends StatelessWidget {
   final MovieListPageStore store;
@@ -21,7 +22,7 @@ class MovieListHomeHeaderWidget extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const CachedNetworkImageProvider(
-            'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/01/the-last-of-us-serie.jpg?w=1200&h=1200&crop=1',
+            Constants.movieListHeaderBanner,
           ),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
