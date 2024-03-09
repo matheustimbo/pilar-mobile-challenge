@@ -20,7 +20,7 @@ class MovieHorizontalListItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(
         MovieDetailsPage.routeName,
-        arguments: MovieDetailsPageArgs(movie: movie),
+        arguments: MovieDetailsPageArgs(movie: movie, movieId: movie.id),
       ),
       child: SizedBox(
         width: 150,

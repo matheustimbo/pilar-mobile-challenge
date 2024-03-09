@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 
 class MovieDetailsTitleWidget extends StatelessWidget {
-  final MovieListItem movie;
+  // final MovieListItem movie;
+  final String movieTitle;
+  final DateTime? movieReleaseDate;
 
   const MovieDetailsTitleWidget({
     super.key,
-    required this.movie,
+    required this.movieTitle,
+    required this.movieReleaseDate,
   });
 
   @override
@@ -21,16 +23,16 @@ class MovieDetailsTitleWidget extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: movie.title,
+              text: movieTitle,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            if (movie.release_date != null)
+            if (movieReleaseDate != null)
               TextSpan(
-                text: ' (${movie.release_date!.year})',
+                text: ' (${movieReleaseDate!.year})',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,

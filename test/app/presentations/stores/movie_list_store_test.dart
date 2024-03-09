@@ -32,23 +32,25 @@ void main() {
     test('setMovies', () {
       final movies = [
         MovieListItem(
-            id: 1,
-            title: 'Title 1',
-            adult: false,
-            vote_average: 10,
-            poster_path: '',
-            release_date: DateTime.now(),
-            overview: '',
-            backdrop_path: ''),
+          id: 1,
+          title: 'Title 1',
+          adult: false,
+          vote_average: 10,
+          poster_path: '',
+          release_date: DateTime.now(),
+          overview: '',
+          backdrop_path: '',
+        ),
         MovieListItem(
-            id: 2,
-            title: 'Title 2',
-            adult: false,
-            vote_average: 10,
-            poster_path: '',
-            release_date: DateTime.now(),
-            overview: '',
-            backdrop_path: ''),
+          id: 2,
+          title: 'Title 2',
+          adult: false,
+          vote_average: 10,
+          poster_path: '',
+          release_date: DateTime.now(),
+          overview: '',
+          backdrop_path: '',
+        ),
       ];
       movieListStore.setMovies(movies);
       expect(movieListStore.movieList, movies);

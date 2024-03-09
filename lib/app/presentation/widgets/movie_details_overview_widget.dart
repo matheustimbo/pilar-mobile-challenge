@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_details.dart';
-import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/skeleton_container.dart';
 
 class MovieDetailsOverviewWidget extends StatelessWidget {
-  final MovieListItem movie;
   final bool isLoadingMovieDetails;
   final bool hasErrorLoadingMovieDetails;
   final MovieDetails? movieDetails;
+  final String movieOverview;
 
   const MovieDetailsOverviewWidget({
     super.key,
-    required this.movie,
+    required this.movieOverview,
     required this.isLoadingMovieDetails,
     required this.hasErrorLoadingMovieDetails,
     this.movieDetails,
@@ -63,7 +62,7 @@ class MovieDetailsOverviewWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: Text(
-              movie.overview,
+              movieOverview,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,

@@ -16,6 +16,13 @@ void main() {
     genres: [],
     runtime: 120,
     tagline: '',
+    title: 'Title 1',
+    adult: false,
+    vote_average: 10,
+    poster_path: '',
+    release_date: DateTime.now(),
+    overview: '',
+    backdrop_path: '',
   );
 
   final exampleMovieCredits = MovieCredits(

@@ -19,10 +19,8 @@ class MovieDetailsPageController {
   final _getMovieCreditsUseCase = DI.get<GetMovieCreditsUseCase>();
 
   void initialize(
-    String posterPathUrl,
     int movieId,
   ) {
-    fetchPosterPathImagePredominantColor(posterPathUrl);
     fetchMovieDetails(movieId);
     fetchMovieCredits(movieId);
   }

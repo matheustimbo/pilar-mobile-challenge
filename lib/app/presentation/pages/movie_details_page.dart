@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 import 'package:pilar_mobile_challenge/app/presentation/controllers/movie_details_page_controller.dart';
 import 'package:pilar_mobile_challenge/app/presentation/stores/movie_details_page_store.dart';
@@ -13,9 +14,13 @@ import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_details_ti
 import 'package:pilar_mobile_challenge/shared/utils/constants.dart';
 
 class MovieDetailsPageArgs {
-  final MovieListItem movie;
+  final MovieListItem? movie;
+  final int movieId;
 
-  const MovieDetailsPageArgs({required this.movie});
+  const MovieDetailsPageArgs({
+    this.movie,
+    required this.movieId,
+  });
 }
 
 class MovieDetailsPage extends StatefulWidget {
@@ -36,80 +41,148 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   final store = MovieDetailsPageStore();
   late final controller = MovieDetailsPageController(store: store);
   late final movie = widget.args.movie;
+  late final movieId = widget.args.movieId;
+  late ReactionDisposer _reactionDisposer;
 
   @override
   void initState() {
-    controller.initialize(posterPathUrl, movie.id);
+    controller.initialize(movieId);
+
+    _reactionDisposer =
+        when((_) => movie != null || store.movieDetails != null, () {
+      controller.fetchPosterPathImagePredominantColor(posterPathUrl!);
+    });
     super.initState();
   }
 
-  String get posterPathUrl =>
-      '${Constants.moviePosterPathw220h330BaseUrl}${movie.poster_path}';
+  @override
+  void dispose() {
+    _reactionDisposer();
+    super.dispose();
+  }
 
-  String get backdropPathUrl =>
-      '${Constants.movieBackdropPathw1000h450BaseUrl}${movie.backdrop_path}';
+  String? get posterPathUrl {
+    if (movie != null) {
+      return '${Constants.moviePosterPathw220h330BaseUrl}${movie!.poster_path}';
+    }
+    if (store.movieDetails != null) {
+      return '${Constants.moviePosterPathw220h330BaseUrl}${store.movieDetails!.poster_path}';
+    }
+    return null;
+  }
+
+  String? get backdropPathUrl {
+    if (movie != null) {
+      return '${Constants.movieBackdropPathw1000h450BaseUrl}${movie!.backdrop_path}';
+    }
+    if (store.movieDetails != null) {
+      return '${Constants.movieBackdropPathw1000h450BaseUrl}${store.movieDetails!.backdrop_path}';
+    }
+    return null;
+  }
+
+  String? get movieTitle => store.movieDetails?.title ?? movie?.title;
+
+  DateTime? get movieReleaseDate =>
+      store.movieDetails?.release_date ?? movie?.release_date;
+
+  String? get movieOverview => store.movieDetails?.overview ?? movie?.overview;
+
+  double? get movieVoteAverage =>
+      store.movieDetails?.vote_average ?? movie?.vote_average;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const AppBarWidget(),
-          SliverToBoxAdapter(
-            child: Observer(builder: (context) {
-              return Container(
-                color: store.moviePosterPredominantColor ?? Colors.black,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Observer(builder: (context) {
-                      return MovieDetailsBannerWidget(
-                        backdropPathUrl: backdropPathUrl,
-                        posterPathUrl: posterPathUrl,
-                        moviePosterPredominantColor:
-                            store.moviePosterPredominantColor,
-                      );
-                    }),
-                    MovieDetailsTitleWidget(movie: movie),
-                    MovieDetailsReviewWidget(movie: movie),
-                    Observer(builder: (context) {
-                      return MovieDetailsInfoWidget(
-                        isLoadingMovieDetails: store.isLoadingMovieDetails,
-                        hasErrorLoadingMovieDetails:
-                            store.hasErrorLoadingMovieDetails,
-                        movieDetails: store.movieDetails,
-                        moviePosterPredominantColor:
-                            store.moviePosterPredominantColor,
-                        movieReleaseDate: movie.release_date,
-                      );
-                    }),
-                    Observer(builder: (context) {
-                      return MovieDetailsOverviewWidget(
-                        movie: movie,
-                        isLoadingMovieDetails: store.isLoadingMovieDetails,
-                        hasErrorLoadingMovieDetails:
-                            store.hasErrorLoadingMovieDetails,
-                        movieDetails: store.movieDetails,
-                      );
-                    }),
-                  ],
-                ),
-              );
-            }),
-          ),
-          SliverToBoxAdapter(
-            child: Observer(builder: (context) {
-              return MovieDetailsCastWidget(
-                isLoadingMovieCredits: store.isLoadingMovieCredits,
-                hasErrorLoadingMovieCredits: store.hasErrorLoadingMovieCredits,
-                movieCredits: store.movieCredits,
-                retryLoadingMovieCredits: () =>
-                    controller.fetchMovieCredits(movie.id),
-              );
-            }),
-          ),
-        ],
-      ),
+      body: Observer(builder: (context) {
+        if (movie == null) {
+          if (store.hasErrorLoadingMovieDetails) {
+            return Center(
+              child: Column(
+                children: [
+                  const Text('Erro ao carregar informações do filme'),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.fetchMovieDetails(movieId);
+                    },
+                    child: const Text('Tentar novamente'),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          if (store.isLoadingMovieDetails) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
+        return CustomScrollView(
+          slivers: [
+            const AppBarWidget(),
+            SliverToBoxAdapter(
+              child: Observer(builder: (context) {
+                return Container(
+                  color: store.moviePosterPredominantColor ?? Colors.black,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Observer(builder: (context) {
+                        return MovieDetailsBannerWidget(
+                          backdropPathUrl: backdropPathUrl!,
+                          posterPathUrl: posterPathUrl!,
+                          moviePosterPredominantColor:
+                              store.moviePosterPredominantColor,
+                        );
+                      }),
+                      MovieDetailsTitleWidget(
+                        movieTitle: movieTitle!,
+                        movieReleaseDate: movieReleaseDate,
+                      ),
+                      MovieDetailsReviewWidget(
+                        movieVoteAverage: movieVoteAverage!,
+                      ),
+                      Observer(builder: (context) {
+                        return MovieDetailsInfoWidget(
+                          isLoadingMovieDetails: store.isLoadingMovieDetails,
+                          hasErrorLoadingMovieDetails:
+                              store.hasErrorLoadingMovieDetails,
+                          movieDetails: store.movieDetails,
+                          moviePosterPredominantColor:
+                              store.moviePosterPredominantColor,
+                          movieReleaseDate: movieReleaseDate,
+                        );
+                      }),
+                      Observer(builder: (context) {
+                        return MovieDetailsOverviewWidget(
+                          movieOverview: movieOverview!,
+                          isLoadingMovieDetails: store.isLoadingMovieDetails,
+                          hasErrorLoadingMovieDetails:
+                              store.hasErrorLoadingMovieDetails,
+                          movieDetails: store.movieDetails,
+                        );
+                      }),
+                    ],
+                  ),
+                );
+              }),
+            ),
+            SliverToBoxAdapter(
+              child: Observer(builder: (context) {
+                return MovieDetailsCastWidget(
+                  isLoadingMovieCredits: store.isLoadingMovieCredits,
+                  hasErrorLoadingMovieCredits:
+                      store.hasErrorLoadingMovieCredits,
+                  movieCredits: store.movieCredits,
+                  retryLoadingMovieCredits: () =>
+                      controller.fetchMovieCredits(movieId),
+                );
+              }),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

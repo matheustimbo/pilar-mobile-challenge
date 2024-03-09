@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
+import 'package:pilar_mobile_challenge/shared/utils/date_converter.dart';
 
 part 'movie_list_item.freezed.dart';
 part 'movie_list_item.g.dart';
@@ -21,20 +21,4 @@ class MovieListItem with _$MovieListItem {
 
   factory MovieListItem.fromJson(Map<String, dynamic> json) =>
       _$MovieListItemFromJson(json);
-}
-
-class DateConverter implements JsonConverter<DateTime?, String> {
-  const DateConverter();
-
-  @override
-  DateTime? fromJson(String dateString) {
-    if (dateString.isEmpty) {
-      return null;
-    }
-    return DateTime.parse(dateString);
-  }
-
-  @override
-  String toJson(DateTime? date) =>
-      date == null ? "" : DateFormat('yyyy-MM-dd').format(date);
 }

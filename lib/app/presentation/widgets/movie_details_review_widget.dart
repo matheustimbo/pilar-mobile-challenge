@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pilar_mobile_challenge/app/data/models/movie_list_item.dart';
 import 'package:pilar_mobile_challenge/app/presentation/widgets/movie_vote_indicator_widget.dart';
 
 class MovieDetailsReviewWidget extends StatelessWidget {
-  final MovieListItem movie;
+  final double movieVoteAverage;
 
   const MovieDetailsReviewWidget({
     super.key,
-    required this.movie,
+    required this.movieVoteAverage,
   });
 
   @override
@@ -22,7 +21,7 @@ class MovieDetailsReviewWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           MovieVoteIndicatorWidget.medium(
-            voteAverage: movie.vote_average,
+            voteAverage: movieVoteAverage,
           ),
           const SizedBox(width: 8),
           const Text(
