@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pilar_mobile_challenge/app/data/datasources/movies_remote_datasource.dart';
+import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_credits.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_details.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movies_list_response.dart';
@@ -7,7 +7,7 @@ import 'package:pilar_mobile_challenge/app/domain/repositories/movies_repository
 import 'package:pilar_mobile_challenge/shared/failures/failure.dart';
 
 class MoviesRepositoryImpl implements MoviesRepository {
-  final MoviesRemoteDatasource _moviesRemoteDatasource;
+  final MoviesDatasource _moviesRemoteDatasource;
 
   MoviesRepositoryImpl(this._moviesRemoteDatasource);
 

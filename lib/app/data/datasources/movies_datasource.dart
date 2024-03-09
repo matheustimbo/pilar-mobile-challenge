@@ -3,7 +3,7 @@ import 'package:pilar_mobile_challenge/app/data/models/movie_credits.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_details.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movies_list_response.dart';
 
-abstract class MoviesRemoteDatasource {
+abstract class MoviesDatasource {
   Future<MoviesListResponse> getPopularMovies(
     int page,
     String language,
@@ -25,10 +25,10 @@ abstract class MoviesRemoteDatasource {
   Future<MovieCredits> getMovieCredits(int movieId, String language);
 }
 
-class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
+class MoviesDatasourceImpl implements MoviesDatasource {
   final Dio _dio;
 
-  MoviesRemoteDatasourceImpl(this._dio);
+  MoviesDatasourceImpl(this._dio);
 
   @override
   Future<MoviesListResponse> getPopularMovies(

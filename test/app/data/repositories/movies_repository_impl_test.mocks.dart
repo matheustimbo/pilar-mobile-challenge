@@ -6,7 +6,7 @@
 import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:pilar_mobile_challenge/app/data/datasources/movies_remote_datasource.dart'
+import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart'
     as _i5;
 import 'package:pilar_mobile_challenge/app/data/models/movie_credits.dart'
     as _i4;
@@ -59,11 +59,10 @@ class _FakeMovieCredits_2 extends _i1.SmartFake implements _i4.MovieCredits {
         );
 }
 
-/// A class which mocks [MoviesRemoteDatasource].
+/// A class which mocks [MoviesDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMoviesRemoteDatasource extends _i1.Mock
-    implements _i5.MoviesRemoteDatasource {
+class MockMoviesDatasource extends _i1.Mock implements _i5.MoviesDatasource {
   @override
   _i6.Future<_i2.MoviesListResponse> getPopularMovies(
     int? page,

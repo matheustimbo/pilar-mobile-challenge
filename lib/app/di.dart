@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pilar_mobile_challenge/app/data/datasources/movies_remote_datasource.dart';
+import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart';
 import 'package:pilar_mobile_challenge/app/data/repositories/movies_repository_impl.dart';
 import 'package:pilar_mobile_challenge/app/domain/repositories/movies_repository.dart';
 import 'package:pilar_mobile_challenge/app/domain/usecases/get_movie_credits_use_case.dart';
@@ -40,8 +40,8 @@ class DI {
     );
 
     //datasources
-    getIt.registerLazySingleton<MoviesRemoteDatasource>(
-        () => MoviesRemoteDatasourceImpl(getIt.get()));
+    getIt.registerLazySingleton<MoviesDatasource>(
+        () => MoviesDatasourceImpl(getIt.get()));
 
     //repositories
     getIt.registerLazySingleton<MoviesRepository>(

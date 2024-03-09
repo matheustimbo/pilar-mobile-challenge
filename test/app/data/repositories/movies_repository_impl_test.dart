@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pilar_mobile_challenge/app/data/datasources/movies_remote_datasource.dart';
+import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_credits.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_details.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movies_list_response.dart';
@@ -11,13 +11,13 @@ import 'package:pilar_mobile_challenge/shared/failures/failure.dart';
 
 import 'movies_repository_impl_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<MoviesRemoteDatasource>()])
+@GenerateNiceMocks([MockSpec<MoviesDatasource>()])
 void main() {
-  late MockMoviesRemoteDatasource mockMoviesRemoteDatasource;
+  late MockMoviesDatasource mockMoviesRemoteDatasource;
   late MoviesRepositoryImpl moviesRepositoryImpl;
 
   setUpAll(() {
-    mockMoviesRemoteDatasource = MockMoviesRemoteDatasource();
+    mockMoviesRemoteDatasource = MockMoviesDatasource();
     moviesRepositoryImpl = MoviesRepositoryImpl(mockMoviesRemoteDatasource);
   });
 

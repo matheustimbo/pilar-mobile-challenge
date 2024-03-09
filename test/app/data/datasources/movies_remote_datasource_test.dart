@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pilar_mobile_challenge/app/data/datasources/movies_remote_datasource.dart';
+import 'package:pilar_mobile_challenge/app/data/datasources/movies_datasource.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_credits.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movie_details.dart';
 import 'package:pilar_mobile_challenge/app/data/models/movies_list_response.dart';
@@ -11,12 +11,12 @@ import 'movies_remote_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
-  late MoviesRemoteDatasource moviesRemoteDatasource;
+  late MoviesDatasource moviesRemoteDatasource;
   late MockDio mockDio;
 
   setUpAll(() {
     mockDio = MockDio();
-    moviesRemoteDatasource = MoviesRemoteDatasourceImpl(mockDio);
+    moviesRemoteDatasource = MoviesDatasourceImpl(mockDio);
   });
 
   final exampleMovieListRawData = {
