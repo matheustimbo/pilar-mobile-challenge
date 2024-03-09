@@ -1,17 +1,50 @@
 # pilar_mobile_challenge
 
-A new Flutter project.
+Projeto em flutter de App mobile/web que consome a api do [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) para listar filmes.
 
-## Getting Started
+## Como executar o projeto
 
-This project is a starting point for a Flutter application.
+Para começar, verifique a integridade da sua instalação do flutter
 
-A few resources to get you started if this is your first Flutter project:
+    flutter doctor
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+clone o projeto e vá para o diretório dele
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# pilar-mobile-challenge
+    git clone https://github.com/matheustimbo/pilar-mobile-challenge
+    cd pilar_mobile_challenge
+
+então, baixe as dependências do projeto e execute em modo debug
+
+    flutter pub get
+    flutter run
+
+a versão web está disponivel para acesso em https://matheustimbo.github.io/
+
+## Como gerar um relatório de testes
+
+    flutter test --coverage && genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
+
+## Como gerar os arquivos .g das stores e models
+
+Utilize
+
+    dart run build_runner build --delete-conflicting-outputs
+
+para gerar uma vez, ou
+
+    dart run build_runner watch --delete-conflicting-outputs
+
+para automaticamente observar mudanças e gerar quando necessário
+
+## Bibliotecas utilizadas
+
+- [flutter_mobx],[mobx] e [mobx_codegen] para as stores reativas.
+- [dio](https://pub.dev/packages/dio) cliente HTTP
+- [build_runner](https://pub.dev/packages/build_runner) gera arquivos .g das stores do mobx e models do freezed
+- [intl](https://pub.dev/packages/intl) utilitários de internacionalização e localização
+- [cached_network_image](https://pub.dev/packages/cached_network_image) cache de imagens
+- [freezed], [freezed_annotation] e [json_serializable] para gerar dataclasses utilizadas nos models
+- [pallete_generator] para determinar a cor primária de uma imagem
+- [get_it] injeção de dependências
+- [mockito] para gerar mocks em testes unitários
+- [equatable], [google_fonts], [curved_progress_bar] e [shimmer] são utilitários menores
