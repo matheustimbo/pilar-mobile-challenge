@@ -29,6 +29,7 @@ class MovieSearchPageController {
     }, (response) {
       store.searchMovies.setMovies(response.results);
       store.searchMovies.setLastFetchedPage(response.page);
+      store.searchMovies.setTotalPages(response.total_pages);
     });
     store.searchMovies.setIsLoadingInitialMovieList(false);
   }

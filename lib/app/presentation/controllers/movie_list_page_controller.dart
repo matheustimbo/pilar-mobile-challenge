@@ -51,6 +51,7 @@ class MovieListPageController {
     }, (response) {
       store.setMovies(response.results);
       store.setLastFetchedPage(response.page);
+      store.setTotalPages(response.total_pages);
     });
     store.setIsLoadingInitialMovieList(false);
   }
